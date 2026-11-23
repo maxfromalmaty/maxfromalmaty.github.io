@@ -3,248 +3,320 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Max Perepelitsa — видеопортфолио</title>
-<meta name="description" content="Макс Перепелица — оператор-постановщик, режиссёр и продюсер видео в Алматы. Реклама, Reels, ивенты, FPV, клипы, ИИ-видео.">
-<meta property="og:title" content="Max Perepelitsa — видеопортфолио">
-<meta property="og:description" content="Оператор-постановщик, режиссёр, продюсер видео. Алматы.">
+<title>Макс Перепелица — оператор-постановщик, Алматы</title>
+<meta name="description" content="Макс Перепелица — оператор-постановщик и режиссёр в Алматы. Реклама, Reels, ивенты, FPV, клипы и ИИ-видео.">
+<meta property="og:title" content="Макс Перепелица — оператор-постановщик">
+<meta property="og:description" content="Реклама, Reels, ивенты, FPV и ИИ-видео. Алматы.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@600;800&family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Layout idea: a contact sheet on a dark lightbox. Numbered 16:9 frames in a grid, then a 9:16 strip. */
+/* Layout idea: a neutral grading-suite grey surround so the films read true; the page opens on a test card
+   with the name as a lower-third slate. One bold element (the bars), everything else quiet and left-aligned. */
 :root{
-  --bg:#0e0d0c;
-  --surface:#181715;
-  --line:#2b2926;
-  --text:#f2eee7;
-  --muted:#9c968c;
-  --rec:#e8452f;
-  --display:"Unbounded","Arial Black",system-ui,sans-serif;
-  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  color-scheme:dark;
+  --surround:#8e9193;   /* 18% grey card, the colorist's neutral surround */
+  --black:#000;
+  --white:#fff;
+  --shade:#7a7d7f;      /* poster placeholder, a stop under the surround */
+  --ink-soft:#26292b;   /* secondary text on grey */
+  --display:"Fira Sans Extra Condensed","Arial Narrow",sans-serif;
+  --body:"Fira Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{background:var(--surround);color:var(--black);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--rec);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+:focus-visible{outline:3px solid var(--white);outline-offset:3px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
 html.en .ru, html:not(.en) .en{display:none !important}
 
-/* top bar */
-.bar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
-.mark{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:10px;text-decoration:none}
-.dot{width:9px;height:9px;border-radius:50%;background:var(--rec);box-shadow:0 0 0 4px color-mix(in srgb,var(--rec) 22%,transparent)}
-@media (prefers-reduced-motion:no-preference){.dot{animation:blink 1.6s steps(2,start) infinite}}
-@keyframes blink{to{opacity:.25}}
-.bar-right{display:flex;align-items:center;gap:10px}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.lang button{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;padding:6px 11px;color:var(--muted)}
-.lang button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;text-decoration:none;padding:12px 20px;border-radius:999px;background:var(--rec);color:#fff;transition:transform .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
-.btn.sm{padding:8px 14px;font-size:14px}
+/* language switch */
+.lang{position:absolute;top:14px;right:clamp(16px,4vw,48px);z-index:3;display:flex;background:var(--black)}
+.lang button{all:unset;cursor:pointer;font:500 14px/1 var(--body);color:#aaa;padding:9px 12px}
+.lang button[aria-pressed="true"]{color:var(--white);background:#333}
 
-/* hero */
-.hero{padding-block:clamp(48px,9vw,110px) clamp(36px,6vw,64px)}
-.eyebrow{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:0 0 20px}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,8.4vw,104px);line-height:.95;letter-spacing:-.02em;margin:0 0 28px;text-wrap:balance}
-h1 span{display:block;color:var(--muted)}
-.lede{font-size:clamp(18px,2.1vw,22px);max-width:40ch;margin:0 0 32px;color:var(--text)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.mail{font-family:var(--mono);font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}
-.mail:hover{color:var(--text)}
+/* test card */
+.card{position:relative;display:grid;grid-template-rows:67fr 8fr 25fr;height:clamp(340px,62vw,640px);background:var(--black)}
+.row{display:grid}
+.r1{grid-template-columns:repeat(7,1fr)}
+.r2{grid-template-columns:repeat(7,1fr)}
+.r3{grid-template-columns:5fr 5fr 5fr 5fr 1.66fr 1.66fr 1.68fr 5fr}
+.c-grey{background:#c0c0c0}.c-yel{background:#c0c000}.c-cyan{background:#00c0c0}.c-grn{background:#00c000}
+.c-mag{background:#c000c0}.c-red{background:#c00000}.c-blue{background:#0000c0}.c-blk{background:#131313}
+.c-i{background:#00214c}.c-wht{background:#fff}.c-q{background:#32006a}.c-sb{background:#090909}.c-sw{background:#1d1d1d}
+.slate{position:absolute;left:clamp(16px,4vw,48px);bottom:clamp(16px,4vw,48px);background:var(--black);color:var(--white);padding:clamp(14px,2.4vw,28px) clamp(18px,3vw,36px) clamp(16px,2.6vw,30px);max-width:calc(100% - 2*clamp(16px,4vw,48px))}
+.slate h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,9.5vw,132px);line-height:.88;letter-spacing:-.005em;margin:0;text-wrap:balance}
+.slate p{font-size:clamp(15px,1.7vw,20px);margin:12px 0 0;color:#d6d6d6}
+@media (prefers-reduced-motion:no-preference){
+  .slate{animation:slate-in .7s cubic-bezier(.2,.7,.2,1) .25s both}
+  @keyframes slate-in{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+}
 
-/* clients */
-.clients{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0}
-.clients .wrap{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 28px}
-.clients small{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.clients b{font-weight:700;font-size:17px}
-.clients em{font-style:normal;color:var(--muted);font-weight:500}
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);padding-block:clamp(40px,6vw,72px)}
+.intro .lead{font-size:clamp(21px,2.4vw,29px);line-height:1.35;margin:0;max-width:30ch}
+.intro .side{display:flex;flex-direction:column;gap:20px;align-self:end}
+.intro .clients{margin:0;color:var(--ink-soft);max-width:44ch}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;font:600 16px/1 var(--body);text-decoration:none;padding:15px 22px;background:var(--black);color:var(--white)}
+.btn.alt{background:var(--white);color:var(--black)}
+.btn:hover{text-decoration:underline;text-underline-offset:4px}
 
 /* sections */
-section{padding-block:clamp(48px,7vw,88px) 0}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
-h2{font-family:var(--display);font-weight:500;font-size:clamp(24px,3.2vw,34px);margin:0;letter-spacing:-.01em;text-wrap:balance}
-.ratio{font-family:var(--mono);font-size:13px;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:6px}
+.block{padding-block:clamp(40px,6vw,72px) 0}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:2px solid var(--black);padding-top:14px;margin-bottom:28px}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,76px);line-height:.95;margin:0}
+.head p{margin:0;color:var(--ink-soft);max-width:46ch}
 
-/* frames */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.frame{display:flex;flex-direction:column;gap:12px;min-width:0}
-.meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--mono);font-size:13px}
-.meta .n{color:var(--rec)}
-.meta .t{color:var(--text);flex:1}
-.meta a{color:var(--muted);text-decoration:none;white-space:nowrap}
-.meta a:hover{color:var(--text)}
-.screen{position:relative;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--line)}
-.screen.h{aspect-ratio:16/9}
-.screen.v{aspect-ratio:9/16}
-.screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.screen::before{content:"";position:absolute;inset:0;background:
-  linear-gradient(var(--line),var(--line)) center/1px 22px no-repeat,
-  linear-gradient(var(--line),var(--line)) center/22px 1px no-repeat}
-.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;align-items:end}
+/* posters */
+.films{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.6vw,32px)}
+.films .work:first-child{grid-column:1 / -1}
+.reels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
+.ai{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,32px)}
+.work{display:flex;flex-direction:column;gap:10px;min-width:0}
+.poster{all:unset;cursor:pointer;position:relative;display:block;width:100%;background:var(--shade) center/cover no-repeat;overflow:hidden}
+.poster.h{aspect-ratio:16/9}.poster.v{aspect-ratio:9/16}
+.poster .play{position:absolute;left:14px;bottom:14px;width:54px;height:54px;background:var(--black);display:grid;place-items:center;transition:transform .15s}
+.poster .play::after{content:"";border-left:15px solid var(--white);border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.poster:hover .play{transform:scale(1.08)}
+.poster:focus-visible{outline:3px solid var(--white);outline-offset:3px}
+.work h3{font:600 17px/1.3 var(--body);margin:0}
+.work span.note{color:var(--ink-soft);font-size:15px}
+.films .work:first-child h3{font-size:20px}
 
-/* about */
-.cols{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,5vw,72px)}
-.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.list li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
-.list li span:first-child{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:2px}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tags span{border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:15px}
-.note{color:var(--muted);max-width:60ch;margin:20px 0 0}
+.ai-empty{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:end}
+.ai-empty p{margin:0 0 16px;max-width:52ch}
+.ai-empty ul{margin:0;padding-left:1.1em;color:var(--ink-soft)}
 
-/* footer */
-.end{margin-top:clamp(64px,9vw,120px);border-top:1px solid var(--line);padding-block:clamp(48px,7vw,80px) 40px}
-.end h2{font-size:clamp(28px,4.6vw,52px);font-weight:700;max-width:18ch;margin-bottom:24px}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:56px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+/* services & kit */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,80px)}
+.services{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.services li{background:var(--black);color:var(--white);padding:8px 14px;font-weight:500}
+.kit{margin:0}
+.kit div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid #6d7072}
+.kit dt{color:var(--ink-soft)}
+.kit dd{margin:0;font-weight:500}
+
+/* contact */
+.contact{margin-top:clamp(64px,9vw,120px);background:var(--black);color:var(--white)}
+.contact .wrap{padding-block:clamp(48px,7vw,88px) 32px}
+.contact h2{color:var(--white);max-width:15ch;margin-bottom:28px}
+.contact .btn{background:var(--white);color:var(--black)}
+.contact .btn.alt{background:#2a2a2a;color:var(--white)}
+.contact small{display:block;margin-top:56px;color:#9a9a9a;font-size:14px}
+
+/* player */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%}
+dialog::backdrop{background:rgba(0,0,0,.92)}
+.stage{position:fixed;inset:0;display:grid;place-items:center;padding:56px 16px 16px}
+.frame{position:relative;width:min(100%,calc((100vh - 80px)*16/9));aspect-ratio:16/9;background:#000}
+.frame.v{width:min(100%,calc((100vh - 80px)*9/16));aspect-ratio:9/16}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.close{all:unset;cursor:pointer;position:fixed;top:12px;right:16px;color:var(--white);font:500 16px/1 var(--body);padding:10px 14px;background:#222}
+.close:focus-visible{outline:2px solid var(--white)}
 
 @media (max-width:900px){
-  .strip{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:58%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}
-  .strip .frame{scroll-snap-align:start}
-  .cols{grid-template-columns:1fr}
+  .reels{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:44%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .reels .work{scroll-snap-align:start}
+  .ai{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .intro,.ai-empty,.cols{grid-template-columns:1fr}
 }
-@media (max-width:640px){
-  .grid{grid-template-columns:1fr}
-  .bar .btn.sm .lbl{display:none}
-  .list li{grid-template-columns:1fr;gap:4px}
+@media (max-width:600px){
+  .films,.ai{grid-template-columns:1fr}
+  .reels{grid-auto-columns:62%}
+  .kit div{grid-template-columns:1fr;gap:2px}
+  .card{height:auto;aspect-ratio:3/4}
+  .r3 .c-sb,.r3 .c-sw{display:none}
+  .r3{grid-template-columns:repeat(5,1fr)}
 }
 </style>
 </head>
 <body>
 
-<header class="bar">
-  <div class="wrap">
-    <a class="mark" href="#top"><span class="dot" aria-hidden="true"></span>Max Perepelitsa</a>
-    <div class="bar-right">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" id="lang-ru" aria-pressed="true">RU</button>
-        <button type="button" id="lang-en" aria-pressed="false">EN</button>
-      </div>
-      <a class="btn sm" href="https://t.me/maxfromalmaty" target="_blank" rel="noopener">✈︎<span class="lbl">&nbsp;Telegram</span></a>
-    </div>
+<header class="card" aria-label="Макс Перепелица">
+  <div class="lang" role="group" aria-label="Язык / Language">
+    <button type="button" id="lang-ru" aria-pressed="true">RU</button>
+    <button type="button" id="lang-en" aria-pressed="false">EN</button>
+  </div>
+  <div class="row r1" aria-hidden="true"><i class="c-grey"></i><i class="c-yel"></i><i class="c-cyan"></i><i class="c-grn"></i><i class="c-mag"></i><i class="c-red"></i><i class="c-blue"></i></div>
+  <div class="row r2" aria-hidden="true"><i class="c-blue"></i><i class="c-blk"></i><i class="c-mag"></i><i class="c-blk"></i><i class="c-cyan"></i><i class="c-blk"></i><i class="c-grey"></i></div>
+  <div class="row r3" aria-hidden="true"><i class="c-i"></i><i class="c-wht"></i><i class="c-q"></i><i class="c-blk"></i><i class="c-sb"></i><i class="c-blk"></i><i class="c-sw"></i><i class="c-blk"></i></div>
+  <div class="slate">
+    <h1><span class="ru">Макс Перепелица</span><span class="en">Max Perepelitsa</span></h1>
+    <p><span class="ru">Оператор-постановщик и режиссёр. Алматы</span><span class="en">Director of photography and director. Almaty</span></p>
   </div>
 </header>
 
-<main id="top">
-  <div class="wrap hero">
-    <p class="eyebrow"><span class="ru">Алматы · 8 лет в съёмке и монтаже</span><span class="en">Almaty · 8 years shooting &amp; editing</span></p>
-    <h1><span class="ru">Макс Перепелица</span><span class="en">Max Perepelitsa</span>
-      <span class="ru">оператор-постановщик</span><span class="en">director of photography</span></h1>
-    <p class="lede">
-      <span class="ru">Режиссирую, снимаю и монтирую рекламу, Reels, ивенты и клипы. Собираю проект под ключ: сценарий, постановка, съёмка, FPV, монтаж, цвет и графика.</span>
-      <span class="en">I direct, shoot and edit commercials, Reels, events and music videos. Turnkey production: script, staging, camera, FPV, edit, color and motion graphics.</span>
+<main>
+  <div class="wrap intro">
+    <p class="lead">
+      <span class="ru">Снимаю рекламу, Reels, ивенты и клипы. Могу взять проект целиком: сценарий, постановка, съёмка с FPV-дрона, монтаж, цвет и графика.</span>
+      <span class="en">I shoot commercials, Reels, events and music videos. I can take a project end to end: script, directing, FPV, editing, color and motion graphics.</span>
     </p>
-    <div class="cta">
-      <a class="btn" href="https://t.me/maxfromalmaty" target="_blank" rel="noopener"><span class="ru">Обсудить проект в Telegram</span><span class="en">Discuss a project on Telegram</span></a>
-      <a class="mail" href="mailto:perexpamp@gmail.com">perexpamp@gmail.com</a>
-    </div>
-  </div>
-
-  <div class="clients">
-    <div class="wrap">
-      <small><span class="ru">Работал с</span><span class="en">Worked with</span></small>
-      <b>Яндекс</b><b>Авито</b><b>Wildberries</b><b>VK</b><b>Xiaomi</b><b>Jägermeister</b><b>Red Bull</b>
-      <b><span class="ru">Андрей Курпатов</span><span class="en">Andrey Kurpatov</span> <em><span class="ru">· YouTube 1 млн+</span><span class="en">· YouTube 1M+</span></em></b>
-    </div>
-  </div>
-
-  <section class="wrap" id="work">
-    <div class="sec-head">
-      <h2><span class="ru">Видео</span><span class="en">Films</span></h2>
-      <span class="ratio">16:9</span>
-    </div>
-    <div class="grid" id="grid-h"></div>
-  </section>
-
-  <section class="wrap" id="reels">
-    <div class="sec-head">
-      <h2>Reels</h2>
-      <span class="ratio">9:16</span>
-    </div>
-    <div class="strip" id="grid-v"></div>
-  </section>
-
-  <section class="wrap" id="about">
-    <div class="cols">
-      <div>
-        <div class="sec-head"><h2><span class="ru">Что делаю</span><span class="en">What I do</span></h2></div>
-        <div class="tags">
-          <span><span class="ru">Реклама</span><span class="en">Commercials</span></span>
-          <span>Reels</span>
-          <span><span class="ru">Клипы</span><span class="en">Music videos</span></span>
-          <span><span class="ru">Ивенты</span><span class="en">Events</span></span>
-          <span><span class="ru">Дрон и FPV</span><span class="en">Drone &amp; FPV</span></span>
-          <span><span class="ru">ИИ-видео</span><span class="en">AI video</span></span>
-          <span><span class="ru">Графика и моушн</span><span class="en">Motion graphics</span></span>
-          <span><span class="ru">Постановка</span><span class="en">Directing</span></span>
-          <span><span class="ru">Сценарии</span><span class="en">Scriptwriting</span></span>
-          <span><span class="ru">Интервью</span><span class="en">Interviews</span></span>
-          <span><span class="ru">Фото</span><span class="en">Photo</span></span>
-        </div>
-        <p class="note">
-          <span class="ru">Снимал для Яндекса, Авито и Wildberries, режиссировал шоу для VK, делал корпоративные видео для Xiaomi, Jägermeister и Red Bull. Руководил продакшном YouTube-канала Андрея Курпатова с аудиторией 1 млн+.</span>
-          <span class="en">Shot for Yandex, Avito and Wildberries, directed a show for VK, made corporate films for Xiaomi, Jägermeister and Red Bull. Ran production for Andrey Kurpatov’s YouTube channel (1M+ audience).</span>
-        </p>
+    <div class="side">
+      <p class="clients">
+        <span class="ru">За 8 лет снимал для Яндекса, Авито, Wildberries, Xiaomi, Jägermeister и Red Bull, режиссировал шоу для VK и руководил продакшном YouTube-канала Андрея Курпатова с аудиторией больше миллиона.</span>
+        <span class="en">Over 8 years I’ve shot for Yandex, Avito, Wildberries, Xiaomi, Jägermeister and Red Bull, directed a show for VK and ran production for Andrey Kurpatov’s YouTube channel with over a million viewers.</span>
+      </p>
+      <div class="actions">
+        <a class="btn" href="https://t.me/maxfromalmaty" target="_blank" rel="noopener"><span class="ru">Написать в Telegram</span><span class="en">Message on Telegram</span></a>
+        <a class="btn alt" href="mailto:perexpamp@gmail.com">perexpamp@gmail.com</a>
       </div>
+    </div>
+  </div>
+
+  <section class="wrap block" id="films" aria-labelledby="films-h">
+    <div class="head">
+      <h2 id="films-h"><span class="ru">Фильмы</span><span class="en">Films</span></h2>
+      <p><span class="ru">Горизонтальные ролики 16:9. Нажмите на кадр, чтобы смотреть.</span><span class="en">Horizontal 16:9 films. Tap a frame to play.</span></p>
+    </div>
+    <div class="films" id="list-films"></div>
+  </section>
+
+  <section class="wrap block" id="reels" aria-labelledby="reels-h">
+    <div class="head">
+      <h2 id="reels-h">Reels</h2>
+      <p><span class="ru">Вертикальные ролики 9:16 для Instagram и TikTok.</span><span class="en">Vertical 9:16 videos for Instagram and TikTok.</span></p>
+    </div>
+    <div class="reels" id="list-reels"></div>
+  </section>
+
+  <section class="wrap block" id="ai" aria-labelledby="ai-h">
+    <div class="head">
+      <h2 id="ai-h"><span class="ru">ИИ-видео</span><span class="en">AI video</span></h2>
+      <p><span class="ru">Генеративное видео там, где снимать вживую дорого или невозможно.</span><span class="en">Generative video where a live shoot is too costly or impossible.</span></p>
+    </div>
+    <div class="ai" id="list-ai"></div>
+    <div class="ai-empty" id="ai-empty" hidden>
       <div>
-        <div class="sec-head"><h2><span class="ru">Техника и софт</span><span class="en">Kit &amp; software</span></h2></div>
-        <ul class="list">
-          <li><span><span class="ru">Камеры</span><span class="en">Cameras</span></span><span>Sony FX3 · Sony A7 III</span></li>
-          <li><span><span class="ru">Дроны</span><span class="en">Drones</span></span><span>DJI Avata 2 · FPV 5″</span></li>
-          <li><span><span class="ru">Стабилизация</span><span class="en">Gimbal</span></span><span>DJI RS 3 Pro</span></li>
-          <li><span><span class="ru">Звук</span><span class="en">Audio</span></span><span>Hollyland Lark Max Duo</span></li>
-          <li><span><span class="ru">Монтаж и цвет</span><span class="en">Edit &amp; color</span></span><span>DaVinci Resolve · Premiere Pro · CapCut · VN</span></li>
-          <li><span><span class="ru">Графика и 3D</span><span class="en">Motion &amp; 3D</span></span><span>After Effects · Blender · Unreal Engine</span></li>
-          <li><span><span class="ru">Нейросети</span><span class="en">AI</span></span><span><span class="ru">генерация видео и медиаконтента</span><span class="en">video and media generation</span></span></li>
-          <li><span><span class="ru">Ещё</span><span class="en">Also</span></span><span><span class="ru">водительские права · русский, English</span><span class="en">driving licence · Russian, English</span></span></li>
+        <p><span class="ru">Делаю ролики с нейросетями от идеи до готового монтажа: пишу сценарий, собираю референсы и персонажей, генерирую кадры и свожу их со съёмкой, графикой и звуком.</span><span class="en">I make AI films from idea to final cut: script, references and characters, generated shots, combined with live footage, graphics and sound.</span></p>
+        <ul>
+          <li><span class="ru">рекламные ИИ-ролики и креативы для таргета</span><span class="en">AI commercials and ad creatives</span></li>
+          <li><span class="ru">клипы и короткие фильмы</span><span class="en">music videos and short films</span></li>
+          <li><span class="ru">вставки и эффекты в обычные съёмки</span><span class="en">AI shots and effects inside live-action</span></li>
         </ul>
       </div>
+      <div class="actions"><a class="btn" href="https://t.me/maxfromalmaty" target="_blank" rel="noopener"><span class="ru">Запросить примеры ИИ-работ</span><span class="en">Ask for AI examples</span></a></div>
     </div>
   </section>
 
-  <footer class="wrap end">
-    <h2><span class="ru">Расскажите о задаче, предложу формат и бюджет</span><span class="en">Tell me about your project and I’ll suggest a format and budget</span></h2>
-    <div class="cta">
-      <a class="btn" href="https://t.me/maxfromalmaty" target="_blank" rel="noopener">Telegram @maxfromalmaty</a>
-      <a class="btn ghost" href="mailto:perexpamp@gmail.com">perexpamp@gmail.com</a>
+  <section class="wrap block" id="about" aria-labelledby="about-h">
+    <div class="cols">
+      <div>
+        <div class="head"><h2 id="about-h"><span class="ru">Что снимаю</span><span class="en">What I shoot</span></h2></div>
+        <ul class="services">
+          <li><span class="ru">Реклама</span><span class="en">Commercials</span></li>
+          <li>Reels</li>
+          <li><span class="ru">Клипы</span><span class="en">Music videos</span></li>
+          <li><span class="ru">Ивенты</span><span class="en">Events</span></li>
+          <li><span class="ru">FPV и дрон</span><span class="en">FPV and drone</span></li>
+          <li><span class="ru">ИИ-видео</span><span class="en">AI video</span></li>
+          <li><span class="ru">Графика и моушн</span><span class="en">Motion graphics</span></li>
+          <li><span class="ru">Постановка</span><span class="en">Directing</span></li>
+          <li><span class="ru">Сценарии</span><span class="en">Scripts</span></li>
+          <li><span class="ru">Интервью</span><span class="en">Interviews</span></li>
+          <li><span class="ru">Фото</span><span class="en">Photo</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="head"><h2><span class="ru">Техника</span><span class="en">Kit</span></h2></div>
+        <dl class="kit">
+          <div><dt><span class="ru">Камеры</span><span class="en">Cameras</span></dt><dd>Sony FX3, Sony A7 III</dd></div>
+          <div><dt><span class="ru">Дроны</span><span class="en">Drones</span></dt><dd><span class="ru">DJI Avata 2, FPV-дрон 5″</span><span class="en">DJI Avata 2, 5″ FPV drone</span></dd></div>
+          <div><dt><span class="ru">Стабилизатор</span><span class="en">Gimbal</span></dt><dd>DJI RS 3 Pro</dd></div>
+          <div><dt><span class="ru">Звук</span><span class="en">Audio</span></dt><dd>Hollyland Lark Max Duo</dd></div>
+          <div><dt><span class="ru">Монтаж и цвет</span><span class="en">Edit and color</span></dt><dd>DaVinci Resolve, Premiere Pro, CapCut</dd></div>
+          <div><dt><span class="ru">Графика и 3D</span><span class="en">Motion and 3D</span></dt><dd>After Effects, Blender, Unreal Engine</dd></div>
+          <div><dt><span class="ru">Ещё</span><span class="en">Also</span></dt><dd><span class="ru">водительские права, русский и английский</span><span class="en">driving licence, Russian and English</span></dd></div>
+        </dl>
+      </div>
     </div>
-    <div class="foot"><span>© 2026 Max Perepelitsa</span><span><span class="ru">Алматы, Казахстан</span><span class="en">Almaty, Kazakhstan</span></span></div>
-  </footer>
+  </section>
 </main>
 
+<footer class="contact">
+  <div class="wrap">
+    <h2><span class="ru">Расскажите о задаче, предложу формат и бюджет</span><span class="en">Tell me about the job and I’ll suggest a format and budget</span></h2>
+    <div class="actions">
+      <a class="btn" href="https://t.me/maxfromalmaty" target="_blank" rel="noopener">Telegram @maxfromalmaty</a>
+      <a class="btn alt" href="mailto:perexpamp@gmail.com">perexpamp@gmail.com</a>
+    </div>
+    <small>© 2026 <span class="ru">Макс Перепелица, Алматы</span><span class="en">Max Perepelitsa, Almaty</span></small>
+  </div>
+</footer>
+
+<dialog id="player" aria-label="Видео">
+  <div class="stage">
+    <button type="button" class="close" id="player-close"><span class="ru">Закрыть</span><span class="en">Close</span></button>
+    <div class="frame" id="player-frame"></div>
+  </div>
+</dialog>
+
 <script>
-const H = [
-  {id:"1249243823", ru:"Корпоратив · Чемпионат бизнес-клубов", en:"Corporate · Business Clubs Championship"},
-  {id:"1249253751", ru:"Ивент · Гонки", en:"Event · Racing"},
-  {id:"1249254796", ru:"Недвижимость · FPV", en:"Real estate · FPV"},
-  {id:"1249255608", ru:"FPV", en:"FPV"},
-  {id:"680587458",  ru:"Бэкстейдж фильма", en:"Film backstage"},
-  {id:"680589281",  ru:"Реклама · Автомойка", en:"Ad · Car wash"}
+/* To add a work: copy a line, set the video id and titles.
+   src: "vimeo" or "youtube". The first film is shown large. */
+const FILMS = [
+  {src:"vimeo", id:"1249254796", ru:"Недвижимость, FPV", en:"Real estate, FPV"},
+  {src:"vimeo", id:"1249253751", ru:"Ивент: гонки", en:"Event: racing"},
+  {src:"vimeo", id:"1249243823", ru:"Корпоративный фильм: Чемпионат бизнес-клубов", en:"Corporate: Business Clubs Championship"},
+  {src:"vimeo", id:"1249255608", ru:"FPV", en:"FPV"},
+  {src:"vimeo", id:"680589281",  ru:"Реклама автомойки", en:"Car wash ad"},
+  {src:"vimeo", id:"680587458",  ru:"Бэкстейдж фильма", en:"Film backstage"}
 ];
-const V = [
-  {id:"1249257474", ru:"Ивент", en:"Event"},
-  {id:"1249257812", ru:"Бэкстейдж ивента", en:"Event backstage"},
-  {id:"1249258601", ru:"Ивент", en:"Event"},
-  {id:"1249258107", ru:"Реклама", en:"Ad"},
-  {id:"1249260421", ru:"Реклама", en:"Ad"}
+const REELS = [
+  {src:"vimeo", id:"1249258107", ru:"Реклама", en:"Ad"},
+  {src:"vimeo", id:"1249257474", ru:"Ивент", en:"Event"},
+  {src:"vimeo", id:"1249260421", ru:"Реклама", en:"Ad"},
+  {src:"vimeo", id:"1249257812", ru:"Бэкстейдж ивента", en:"Event backstage"},
+  {src:"vimeo", id:"1249258601", ru:"Ивент", en:"Event"}
 ];
-function card(v, i, shape){
-  const n = String(i + 1).padStart(2, "0");
-  const src = "https://player.vimeo.com/video/" + v.id + "?dnt=1&title=0&byline=0&portrait=0&badge=0";
-  return '<article class="frame">' +
-    '<div class="meta"><span class="n">' + n + '</span>' +
-    '<span class="t"><span class="ru">' + v.ru + '</span><span class="en">' + v.en + '</span></span>' +
-    '<a href="https://vimeo.com/' + v.id + '" target="_blank" rel="noopener">Vimeo ↗</a></div>' +
-    '<div class="screen ' + shape + '"><iframe src="' + src + '" loading="lazy" title="' + v.en + '" ' +
-    'allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></article>';
+/* AI works: shape "h" for 16:9, "v" for 9:16. Empty list shows the AI description instead. */
+const AI = [];
+
+function playerUrl(w){
+  return w.src === "youtube"
+    ? "https://www.youtube-nocookie.com/embed/" + w.id + "?autoplay=1&rel=0"
+    : "https://player.vimeo.com/video/" + w.id + "?autoplay=1&dnt=1&title=0&byline=0&portrait=0";
 }
-document.getElementById("grid-h").innerHTML = H.map((v,i)=>card(v,i,"h")).join("");
-document.getElementById("grid-v").innerHTML = V.map((v,i)=>card(v,i,"v")).join("");
+function render(list, el, shape){
+  el.innerHTML = list.map((w, i) => {
+    const s = w.shape || shape;
+    return '<figure class="work" style="margin:0">' +
+      '<button type="button" class="poster ' + s + '" data-list="' + el.id + '" data-i="' + i + '" aria-label="' + w.ru + '">' +
+      '<span class="play" aria-hidden="true"></span></button>' +
+      '<figcaption><h3><span class="ru">' + w.ru + '</span><span class="en">' + w.en + '</span></h3></figcaption></figure>';
+  }).join("");
+  list.forEach((w, i) => thumb(w, el.querySelector('[data-i="' + i + '"]'), w.shape || shape));
+}
+function thumb(w, btn, shape){
+  if (w.src === "youtube") { btn.style.backgroundImage = "url(https://i.ytimg.com/vi/" + w.id + "/hqdefault.jpg)"; return; }
+  const width = shape === "v" ? 720 : 1280;
+  fetch("https://vimeo.com/api/oembed.json?width=" + width + "&url=" + encodeURIComponent("https://vimeo.com/" + w.id))
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { if (d && d.thumbnail_url) btn.style.backgroundImage = "url(" + d.thumbnail_url + ")"; })
+    .catch(() => {});
+}
+const lists = {"list-films": FILMS, "list-reels": REELS, "list-ai": AI};
+render(FILMS, document.getElementById("list-films"), "h");
+render(REELS, document.getElementById("list-reels"), "v");
+if (AI.length) render(AI, document.getElementById("list-ai"), "h");
+else document.getElementById("ai-empty").hidden = false;
+
+const dlg = document.getElementById("player"), frame = document.getElementById("player-frame");
+document.addEventListener("click", e => {
+  const b = e.target.closest(".poster"); if (!b) return;
+  const w = lists[b.dataset.list][+b.dataset.i];
+  const v = b.classList.contains("v");
+  frame.className = "frame" + (v ? " v" : "");
+  frame.innerHTML = '<iframe src="' + playerUrl(w) + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="' + w.en + '"></iframe>';
+  if (dlg.showModal) dlg.showModal(); else window.open(w.src === "youtube" ? "https://youtu.be/" + w.id : "https://vimeo.com/" + w.id);
+});
+function closePlayer(){ frame.innerHTML = ""; if (dlg.open) dlg.close(); }
+document.getElementById("player-close").addEventListener("click", closePlayer);
+dlg.addEventListener("close", () => { frame.innerHTML = ""; });
+dlg.addEventListener("click", e => { if (e.target === dlg || e.target.classList.contains("stage")) closePlayer(); });
 
 const ruBtn = document.getElementById("lang-ru"), enBtn = document.getElementById("lang-en");
 function setLang(l){
@@ -254,8 +326,8 @@ function setLang(l){
   enBtn.setAttribute("aria-pressed", l === "en");
   try { localStorage.setItem("lang", l); } catch(e) {}
 }
-ruBtn.addEventListener("click", ()=>setLang("ru"));
-enBtn.addEventListener("click", ()=>setLang("en"));
+ruBtn.addEventListener("click", () => setLang("ru"));
+enBtn.addEventListener("click", () => setLang("en"));
 let start = "ru";
 if (location.hash === "#en") start = "en";
 else { try { start = localStorage.getItem("lang") || "ru"; } catch(e) {} }

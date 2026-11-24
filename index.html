@@ -90,6 +90,8 @@ header.hero{position:relative;z-index:1;padding-top:clamp(120px,16vw,180px)}
 .vf-wrap{margin-top:clamp(40px,6vw,72px)}
 .vf{display:block;width:100%;aspect-ratio:16/9;cursor:pointer;border:0;padding:0;color:var(--text);font:inherit;text-align:left;
   background:#0b0b0c center/cover no-repeat}
+.vf video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s var(--ease)}
+.vf video.on{opacity:1}
 .vf::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,transparent 65%,rgba(0,0,0,.55))}
 .vf .ui{position:absolute;inset:clamp(14px,2.4vw,28px);z-index:1;display:grid;grid-template-rows:auto 1fr auto;font-variant-numeric:tabular-nums}
 .vf .top,.vf .bot{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:clamp(12px,1.3vw,15px);font-weight:500}
@@ -229,12 +231,13 @@ dialog::backdrop{background:rgba(0,0,0,.86);backdrop-filter:blur(18px);-webkit-b
 
   <div class="vf-wrap bezel">
     <div class="core">
-      <button type="button" class="vf" id="hero-vf" data-list="FILMS" data-i="0" aria-label="Смотреть: Недвижимость, FPV">
+      <button type="button" class="vf" id="hero-vf" data-list="HERO" data-i="0" aria-label="Смотреть видео">
+        <video class="loop" id="hero-loop" muted loop playsinline autoplay preload="auto" aria-hidden="true" tabindex="-1"></video>
         <span class="corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span class="ui">
           <span class="top"><span class="rec"><span class="dot" aria-hidden="true"></span>REC</span><span class="tc" id="tc" aria-hidden="true">00:00:00:00</span></span>
           <span></span>
-          <span class="bot"><span class="watch"><b aria-hidden="true"></b><span class="ru">Недвижимость, FPV</span><span class="en">Real estate, FPV</span></span><span class="meta" aria-hidden="true">4K 25p</span></span>
+          <span class="bot"><span class="watch"><b aria-hidden="true"></b><span class="ru" id="hero-ru"></span><span class="en" id="hero-en"></span></span><span class="meta" aria-hidden="true">4K 25p</span></span>
         </span>
       </button>
     </div>
@@ -347,9 +350,16 @@ dialog::backdrop{background:rgba(0,0,0,.86);backdrop-filter:blur(18px);-webkit-b
 <script>
 document.documentElement.classList.add("js");
 
-/* To add a work: copy a line, set the video id and titles. src: "vimeo" or "youtube".
-   The first film fills the viewfinder at the top; the rest go to the Films grid. */
+/* HERO: the big viewfinder at the top.
+   id    = Vimeo id of the video that opens on click (put the showreel here when it's ready)
+   loop  = short silent mp4 uploaded next to index.html; it plays in the viewfinder on repeat.
+           If the file is missing, the Vimeo preview frame is shown instead.
+   To add a work below: copy a line, set the video id and titles. src: "vimeo" or "youtube".
+   A film with the same id as HERO is not repeated in the Films grid. */
+const HERO = {src:"vimeo", id:"1249254796", ru:"Недвижимость, FPV", en:"Real estate, FPV", loop:"hero-loop.mp4"};
+
 const LISTS = {
+  HERO: [HERO],
   FILMS: [
     {src:"vimeo", id:"1249254796", ru:"Недвижимость, FPV", en:"Real estate, FPV"},
     {src:"vimeo", id:"1249253751", ru:"Ивент: гонки", en:"Event: racing"},
@@ -379,22 +389,33 @@ function thumb(w, shape){
         .then(r => r.ok ? r.json() : null).then(d => d && d.thumbnail_url).catch(() => null);
   return thumbs[key];
 }
-function render(name, el, shape, from){
-  const list = LISTS[name], skip = from || 0;
+function render(name, el, shape){
+  const list = LISTS[name], hide = w => name === "FILMS" && w.src === HERO.src && w.id === HERO.id;
   el.innerHTML = list.map((w, i) => {
-    if (i < skip) return "";
+    if (hide(w)) return "";
     const s = w.shape || shape;
     return '<figure class="work rv" style="margin:0"><div class="bezel"><div class="core">' +
       '<button type="button" class="poster ' + s + '" data-list="' + name + '" data-i="' + i + '" aria-label="' + w.ru + '"></button></div>' +
       '<div class="cap"><h3><span class="ru">' + w.ru + '</span><span class="en">' + w.en + '</span></h3><span class="play" aria-hidden="true"></span></div></div></figure>';
   }).join("");
-  list.forEach((w, i) => i >= skip && thumb(w, w.shape || shape).then(u => { if (u) el.querySelector('[data-i="' + i + '"]').style.backgroundImage = "url(" + u + ")"; }));
+  list.forEach((w, i) => !hide(w) && thumb(w, w.shape || shape).then(u => { if (u) el.querySelector('[data-i="' + i + '"]').style.backgroundImage = "url(" + u + ")"; }));
 }
-render("FILMS", document.getElementById("list-films"), "h", 1); /* the first film lives in the viewfinder */
+render("FILMS", document.getElementById("list-films"), "h");
 render("REELS", document.getElementById("list-reels"), "v");
 if (LISTS.AI.length) render("AI", document.getElementById("list-ai"), "h");
 else document.getElementById("ai-empty").hidden = false;
-thumb(LISTS.FILMS[0], "h").then(u => { if (u) document.getElementById("hero-vf").style.backgroundImage = "url(" + u + ")"; });
+/* hero: titles, preview frame, silent loop */
+document.getElementById("hero-ru").textContent = HERO.ru;
+document.getElementById("hero-en").textContent = HERO.en;
+document.getElementById("hero-vf").setAttribute("aria-label", HERO.ru);
+thumb(HERO, "h").then(u => { if (u) document.getElementById("hero-vf").style.backgroundImage = "url(" + u + ")"; });
+const loopEl = document.getElementById("hero-loop");
+if (HERO.loop && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  loopEl.addEventListener("playing", () => loopEl.classList.add("on"), {once: true});
+  loopEl.addEventListener("error", () => loopEl.remove(), {once: true});
+  loopEl.src = HERO.loop;
+  const p = loopEl.play(); if (p && p.catch) p.catch(() => {});
+} else loopEl.remove();
 
 /* running timecode, 25 fps */
 const tc = document.getElementById("tc"), t0 = performance.now();
